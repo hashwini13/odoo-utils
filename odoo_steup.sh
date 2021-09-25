@@ -23,7 +23,7 @@ echo "STEP 3 : INSTALL POSTGRESQL SERVER"
 sudo apt-get install postgresql -y
 
 echo "STEP 4 : CREATE ODOO USER FOR POSTGRESQL"
-sudo su – postgres -c “createuser -s odoo” 2> /dev/null || true
+sudo su – postgres -c "createuser -s odoo" 2> /dev/null || true
 
 echo "STEP 5 : INSTALL PYTHON DEPENDENCIES"
 sudo apt-get install git python3 python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libjpeg-dev gdebi -y
@@ -57,9 +57,7 @@ sudo chown odoo:odoo /var/log/odoo
 echo "STEP 10 :INSTALL ODOO"
 sudo apt-get install git -y
 
-cd ..
-
-sudo git clone https://www.github.com/odoo/odoo /odoo/odoo-server
+sudo git clone --depth 1 --branch 14.0 https://www.github.com/odoo/odoo /odoo/odoo-server
 
 echo "STEP 11 : SETTING PERMISSIONS ON HOME FOLDER"
 sudo chown -R odoo:odoo /odoo/*
@@ -67,18 +65,18 @@ sudo chown -R odoo:odoo /odoo/*
 echo "STEP 12 : CREATE SERVER CONFIG FILE"
 sudo touch /etc/odoo-server.conf
 
-sudo su root -c “printf ‘[options] \n; This is the password that allows database operations:\n’ >> /etc/odoo-server.conf”
+sudo su root -c "printf '[options] \n; This is the password that allows database operations:\n' >> /etc/odoo-server.conf"
 
-sudo su root -c “printf ‘admin_passwd = admin\n’ >> /etc/odoo-server.conf”
+sudo su root -c "printf 'admin_passwd = admin\n' >> /etc/odoo-server.conf"
 
-sudo su root -c “printf ‘xmlrpc_port = 8069\n’ >> /etc/odoo-server.conf”
+sudo su root -c "printf 'xmlrpc_port = 8069\n' >> /etc/odoo-server.conf"
 
-sudo su root -c “printf ‘logfile = /var/log/odoo/odoo-server.log\n’ >> /etc/odoo-server.conf”
+sudo su root -c "printf 'logfile = /var/log/odoo/odoo-server.log\n' >> /etc/odoo-server.conf"
 
-sudo su root -c “printf ‘addons_path=/odoo/odoo-server/addons\n’ >> /etc/odoo-server.conf”
+sudo su root -c "printf 'addons_path=/odoo/odoo-server/addons\n' >> /etc/odoo-server.conf"
 
 sudo chown odoo:odoo /etc/odoo-server.conf
 
-sudo chmod 640 /etc/odoo-server.conf
+sudo chmod 644 /etc/odoo-server.conf
 
 
