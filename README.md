@@ -1,4 +1,5 @@
 # odoo-utils
+```
 
 1. Install net-tools
 
@@ -34,3 +35,4 @@ cd odoo-utils
 ./odoo_setup.sh
 ./odoo_start.sh
 `
+```
